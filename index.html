@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Sofa 🤍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(180deg, #2b1e2f, #4a2f3f);
+    color: #fceef5;
+    overflow-x: hidden;
+}
+
+/* Intro */
+#intro {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #2b1e2f, #4a2f3f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 10;
+    transition: opacity 1.5s ease;
+}
+
+#intro h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4em;
+    color: #ffb6d9;
+}
+
+#intro button {
+    margin-top: 30px;
+    padding: 14px 30px;
+    border-radius: 40px;
+    border: none;
+    background: #ff6fa5;
+    color: white;
+    cursor: pointer;
+}
+
+/* Floating hearts */
+.heart {
+    position: fixed;
+    color: rgba(255, 182, 217, 0.6);
+    animation: floatUp linear infinite;
+    z-index: 0;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(100vh); opacity: 1; }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+.container {
+    max-width: 750px;
+    margin: auto;
+    padding: 120px 25px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3em;
+    color: #ffb6d9;
+}
+
+.section {
+    margin-bottom: 90px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1.5s ease;
+}
+
+.section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+button {
+    padding: 14px 30px;
+    border-radius: 40px;
+    border: none;
+    background: #ff6fa5;
+    color: white;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff4f93;
+}
+
+/* Typewriter */
+#typewriter {
+    font-size: 1.6em;
+    margin-top: 40px;
+    border-right: 2px solid #ffb6d9;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Valentine section */
+#valentineSection {
+    display: none;
+    margin-top: 70px;
+}
+
+#valentineSection h2 {
+    margin-bottom: 20px;
+}
+
+#noBtn {
+    background: #ffffff22;
+    margin-left: 15px;
+    position: relative;
+}
+
+#finalResponse {
+    margin-top: 40px;
+    font-size: 1.4em;
+}
+
+.footer {
+    margin-top: 120px;
+    opacity: 0.5;
+    font-size: 0.9em;
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+    <h1>Sophia 🤍</h1>
+    <p>Since February 4th, 2026</p>
+    <button onclick="start()">Tap to Begin</button>
+</div>
+
+<div class="container">
+
+<div id="s1" class="section">
+<h2>Hi Sofa.</h2>
+<p>
+I didn’t want to just send you words.
+I wanted to build something that feels like how I feel about you.
+</p>
+<button onclick="next('s2')">Keep reading 🤍</button>
+</div>
+
+<div id="s2" class="section">
+<p>
+You are one of the kindest people I’ve ever known.
+The way you care so deeply about the people you love
+is something I admire more than you probably realize.
+</p>
+<button onclick="next('s3')">And… 🤍</button>
+</div>
+
+<div id="s3" class="section">
+<p>
+Whenever I’m having a bad day,
+talking to you makes everything feel lighter.
+</p>
+<p>
+Your laugh is one of my favorite sounds in the world.
+It genuinely changes my mood.
+</p>
+<button onclick="next('s4')">But also… 😭</button>
+</div>
+
+<div id="s4" class="section">
+<p>
+I will never forget when I thought you said
+<b>“hop on me.”</b>
+</p>
+<p>
+And you were just talking about
+<b>hop on neighbors.</b>
+</p>
+<p>
+That moment lives in my head forever.
+</p>
+<button onclick="next('s5')">Okay… serious now 🤍</button>
+</div>
+
+<div id="s5" class="section">
+<p>
+Even though we’re long distance,
+you never feel far from me.
+</p>
+<p>
+You’re my comfort.
+My safe place.
+My favorite person.
+</p>
+
+<div id="typewriter"></div>
+
+<button onclick="showValentine()">One more thing 🤍</button>
+
+<div id="valentineSection">
+    <h2>Will you be my Valentine?</h2>
+
+    <button onclick="yesClicked()" style="background:#ff4f93; font-size:1.1em;">
+        Yes 🤍
+    </button>
+
+    <button id="noBtn" onmouseover="moveNo()">
+        No 🙈
+    </button>
+
+    <div id="finalResponse"></div>
+</div>
+
+</div>
+
+<div class="footer">
+Made with love for Sofa 🤍
+</div>
+
+</div>
+
+<script>
+function start() {
+    document.getElementById("intro").style.opacity = "0";
+    setTimeout(() => {
+        document.getElementById("intro").style.display = "none";
+        document.getElementById("s1").classList.add("show");
+    }, 1500);
+}
+
+function next(id) {
+    document.getElementById(id).classList.add("show");
+}
+
+/* Floating hearts */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    heart.style.animationDuration = (Math.random() * 4 + 4) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 7000);
+}, 400);
+
+/* Typewriter */
+const text = "I love you so much, that I couldn’t even explain it in words.";
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 60);
+    }
+}
+
+document.getElementById("s5").addEventListener("transitionend", typeWriter);
+
+/* Valentine section */
+function showValentine() {
+    document.getElementById("valentineSection").style.display = "block";
+}
+
+function yesClicked() {
+    document.getElementById("finalResponse").innerHTML =
+    "You just made me the happiest person alive, Sofa 🤍";
+}
+
+function moveNo() {
+    const btn = document.getElementById("noBtn");
+    btn.style.position = "absolute";
+    btn.style.left = Math.random() * window.innerWidth + "px";
+    btn.style.top = Math.random() * window.innerHeight + "px";
+}
+</script>
+
+</body>
+</html>
